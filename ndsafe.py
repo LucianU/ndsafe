@@ -9,8 +9,18 @@ class ndsafearray:
         return f"safe({self._array})"
 
     def __getattr__(self, name):
-        """Delegate attribute access to the wrapped NumPy array"""
-        return getattr(self._array, name)
+        attr = getattr(self._array, name)
+
+        if callable(attr):
+            def wrapped_method(*args, **kwargs):
+                result = attr(*args, **kwargs)
+                if isinstance(result, np.ndarray):  # Wrap ndarray outputs
+                    return ndsafearray(result)
+                return result  # Scalars and other types remain unchanged
+
+            return wrapped_method
+
+        return attr  # Non-callable attributes are returned directly
 
     def __getitem__(self, index):
         """Ensure indexing never drops dimensions below 2D"""
