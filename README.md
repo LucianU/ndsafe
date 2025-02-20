@@ -30,7 +30,7 @@ from ndsafe import ndsafearray
 a = ndsafearray([1, 2, 3])
 b = ndsafearray([[4], [5], [6]])
 
-print(a @ b)  # No more unexpected shape errors!
+print(a @ b)  # prints `safe([[32]])`
 ```
 
 ## Key Features
