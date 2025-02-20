@@ -9,8 +9,11 @@ or 2D (`(m, n)`). This can lead to **unexpected errors** in operations like:
 - **Transpose (`.T`)**
 
 `ndsafe` eliminates these issues by:
+
 ✅ **Automatically reshaping 1D arrays to 2D when needed**
+
 ✅ **Ensuring reduction operations (sum, mean, etc.) remain efficient**
+
 ✅ **Preventing silent shape mismatches in mathematical operations**
 
 ## Installation
