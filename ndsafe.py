@@ -25,8 +25,13 @@ class ndsafearray:
     def __getitem__(self, index):
         """Ensure indexing never drops dimensions below 2D"""
         result = self._array[index]
-        if result.ndim < 2:  # Keep it at least 2D
-            result = result.reshape(1, -1) if self._array.shape[0] > 1 else result.reshape(-1, 1)
+
+        if result.ndim < 2:  # Prevents silent reduction to 1D
+            if isinstance(index, tuple) and any(isinstance(i, slice) for i in index):
+                result = result.reshape(-1, 1)  # Column vector if slicing a single column
+            else:
+                result = result.reshape(1, -1)  # Row vector otherwise
+
         return ndsafearray(result)
 
     def unwrap(self):
