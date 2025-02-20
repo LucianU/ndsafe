@@ -2,6 +2,12 @@ import numpy as np
 from ndsafe import ndsafearray
 
 
+def test_getitem_preserves_dimensions():
+    a = ndsafearray(np.array([[1, 2, 3], [4, 5, 6]]))
+
+    np.testing.assert_array_equal(a[0].unwrap(), [[1, 2, 3]])
+    np.testing.assert_array_equal(a[:, 1].unwrap(), [[2], [5]])
+
 def test_sum_doesnt_wrap_scalar():
     """Test sum over all elements (should return a scalar)."""
     a = ndsafearray(np.array([[1, 2, 3], [4, 5, 6]]))
