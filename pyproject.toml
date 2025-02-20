@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ndsafe"
 version = "0.1.0"
-description = "A safer NumPy array with automatic reshaping for matrix operations."
+description = "A NumPy-compatible array that ensures shape safety and prevents silent.errors."
 authors = ["Lucian Ursu <lucian.ursu@gmail.com>"]
 readme = "README.md"
 
